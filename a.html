@@ -24,20 +24,19 @@
     transition: transform 0.5s ease-in-out;
   }
   .slide {
-    min-width: 100%;
+    width: 200px; /* Lebar slide */
+    margin-right: 20px; /* Jarak antar slide */
     overflow: hidden;
     position: relative;
-    border: 5px solid #FF6E61; /* Border tebal di kiri, kanan, dan bawah gambar */
-    border-radius: 10px; /* Untuk membuat border bundar */
+    border: 10px solid #FF6E61; /* Border tebal */
+    border-radius: 10px; /* Border bundar */
   }
   .slide img {
-    width: auto; /* Mengatur ukuran gambar menjadi fleksibel */
-    max-width: 100%;
+    width: 100%; /* Ukuran gambar */
     height: auto;
     display: block;
-    object-fit: cover; /* Menjaga aspek ratio dan mengisi ruang yang tersedia */
-    background-color: transparent; /* Menghapus latar belakang gambar */
-    border-radius: 10px; /* Membuat border bundar pada gambar */
+    object-fit: cover; /* Memastikan gambar terisi dengan baik */
+    border-radius: 10px; /* Border bundar pada gambar */
   }
   .slide-controls {
     position: absolute;
@@ -55,7 +54,7 @@
     width: 20px;
     height: 4px; /* Tinggi ikon */
     background-color: #aaa;
-    border-radius: 10px; /* Membuat bundar */
+    border-radius: 10px; /* Border bundar pada indikator */
     margin: 0 10px;
     cursor: pointer;
     display: flex;
@@ -101,7 +100,7 @@
   let slideIndex = 0;
 
   function showSlide(index) {
-    slides.style.transform = `translateX(${-index * 100}%)`;
+    slides.style.transform = `translateX(${-index * 220}px)`; /* Lebar slide + jarak antar slide */
   }
 
   function setActiveIndicator(index) {
