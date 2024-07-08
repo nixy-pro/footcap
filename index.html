@@ -196,61 +196,204 @@
 
 
 
+	<!-- 
+        - #COLLECTION
+      -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML5 Image Slider with Zoom Effect</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .slider-container {
+    width: 80%;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px; /* Menggunakan border bundar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease;
+    position: relative;
+  }
+  
+  .slide {
+    min-width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Menambahkan border bundar pada gambar */
+    cursor: pointer; /* Mengubah kursor saat di atas gambar */
+    transition: transform 0.3s ease;
+  }
+  
+  .slide img:hover {
+    transform: scale(1.05); /* Efek membesar saat dihover */
+  }
+  
+  .slide.zoomed img {
+    transform: scale(1.5); /* Ukuran besar saat zoomed */
+    z-index: 2; /* Menempatkan gambar di atas */
+    position: relative;
+  }
+  
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Warna latar belakang */
+    z-index: 1;
+    border-radius: 10px; /* Menyesuaikan dengan border gambar */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .slide:hover::before {
+    opacity: 1; /* Efek muncul saat dihover */
+  }
+  
+  .slider-controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px; /* Jarak dari bawah */
+    z-index: 2;
+  }
+  
+  .slider-controls button {
+    background-color: #FF6E61; /* Warna FF6E61 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    margin: 0 5px;
+  }
+
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="slider-container">
+  <div class="slides">
+    <div class="slide">
+      <img src="https://i.pinimg.com/originals/02/98/7d/02987dfa012d4fa45bfe67b0cf61a996.png" alt="Gambar 1">
+    </div>
+    <div class="slide">
+      <img src="https://marketplace.canva.com/EAF4-gxh3bA/1/0/1131w/canva-hitam-dan-putih-minimalis-cv-lamaran-kerja-resume-Yw5ljRDWLj8.jpg" alt="Gambar 2">
+    </div>
+    <div class="slide">
+      <img src="https://cms.dailysocial.id/wp-content/uploads/2022/10/cv1.jpg" alt="Gambar 3">
+    </div>
+    <!-- Tambahkan lebih banyak div .slide jika perlu -->
+  </div>
+  
+  <div class="slider-controls">
+    <button id="prevSlide">&#10094; Prev</button>
+    <button id="nextSlide">Next &#10095;</button>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelector('.slides');
+  const slideWidth = document.querySelector('.slide').clientWidth;
+  let currentIndex = 0;
+
+  document.getElementById('prevSlide').addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlidePosition();
+    }
+  });
+
+  document.getElementById('nextSlide').addEventListener('click', () => {
+    if (currentIndex < slides.children.length - 1) {
+      currentIndex++;
+      updateSlidePosition();
+    }
+  });
+
+  function updateSlidePosition() {
+    const newPosition = -currentIndex * slideWidth;
+    slides.style.transform = `translateX(${newPosition}px)`;
+  }
+
+  // Handle touch events for swipe functionality
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slides.addEventListener('touchstart', (event) => {
+    touchStartX = event.touches[0].clientX;
+  });
+
+  slides.addEventListener('touchend', (event) => {
+    touchEndX = event.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    if (touchEndX < touchStartX) {
+      // Swiped left (next slide)
+      if (currentIndex < slides.children.length - 1) {
+        currentIndex++;
+        updateSlidePosition();
+      }
+    } else if (touchEndX > touchStartX) {
+      // Swiped right (previous slide)
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlidePosition();
+      }
+    }
+  }
+
+  // Toggle zoom effect on image click
+  slides.addEventListener('click', (event) => {
+    const clickedSlide = event.target.closest('.slide');
+    if (clickedSlide) {
+      clickedSlide.classList.toggle('zoomed');
+    }
+  });
+</script>
+
+</body>
+</html>
+
 
       <!-- 
         - #COLLECTION
       -->
 
-      <section class="section collection">
-        <div class="container">
-
-          <ul class="collection-list has-scrollbar">
-
-            <li>
-              <div class="collection-card" style="background-image: url('./assets/images/collection-1.jpg')">
-                <h3 class="h4 card-title">Men Collections</h3>
-
-                <a href="#" class="btn btn-secondary">
-                  <span>Explore All</span>
-
-                  <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                </a>
-              </div>
-            </li>
-
-            <li>
-              <div class="collection-card" style="background-image: url('./assets/images/collection-2.jpg')">
-                <h3 class="h4 card-title">Women Collections</h3>
-
-                <a href="#" class="btn btn-secondary">
-                  <span>Explore All</span>
-
-                  <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                </a>
-              </div>
-            </li>
-
-            <li>
-              <div class="collection-card" style="background-image: url('./assets/images/collection-3.jpg')">
-                <h3 class="h4 card-title">Sports Collections</h3>
-
-                <a href="#" class="btn btn-secondary">
-                  <span>Explore All</span>
-
-                  <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                </a>
-              </div>
-            </li>
-
-          </ul>
-
-        </div>
-      </section>
-
-
-
-
-
+      
       <!-- 
         - #PRODUCT
       -->
