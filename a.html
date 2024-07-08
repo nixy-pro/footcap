@@ -24,12 +24,9 @@
     transition: transform 0.5s ease-in-out;
   }
   .slide {
-    width: 200px; /* Lebar slide */
-    margin-right: 20px; /* Jarak antar slide */
+    width: 100%; /* Lebar slide */
     overflow: hidden;
     position: relative;
-    border: 10px solid #FF6E61; /* Border tebal */
-    border-radius: 10px; /* Border bundar */
   }
   .slide img {
     width: 100%; /* Ukuran gambar */
@@ -52,7 +49,7 @@
   }
   .indicator {
     width: 20px;
-    height: 4px; /* Tinggi ikon */
+    height: 4px; /* Tinggi indikator */
     background-color: #aaa;
     border-radius: 10px; /* Border bundar pada indikator */
     margin: 0 10px;
@@ -75,13 +72,13 @@
 <div class="slider-container">
   <div class="slides">
     <div class="slide">
-      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist">
+      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist 1">
     </div>
     <div class="slide">
-      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist">
+      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist 2">
     </div>
     <div class="slide">
-      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist">
+      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist 3">
     </div>
   </div>
   
@@ -100,7 +97,7 @@
   let slideIndex = 0;
 
   function showSlide(index) {
-    slides.style.transform = `translateX(${-index * 220}px)`; /* Lebar slide + jarak antar slide */
+    slides.style.transform = `translateX(${-index * 100}%)`;
   }
 
   function setActiveIndicator(index) {
