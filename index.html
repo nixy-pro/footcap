@@ -204,7 +204,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTML5 Image Slider with Zoom Effect</title>
+<title>HTML5 Image Slider</title>
 <style>
   body {
     margin: 0;
@@ -237,18 +237,6 @@
     height: auto;
     display: block;
     border-radius: 10px; /* Menambahkan border bundar pada gambar */
-    cursor: pointer; /* Mengubah kursor saat di atas gambar */
-    transition: transform 0.3s ease;
-  }
-  
-  .slide img:hover {
-    transform: scale(1.05); /* Efek membesar saat dihover */
-  }
-  
-  .slide.zoomed img {
-    transform: scale(1.5); /* Ukuran besar saat zoomed */
-    z-index: 2; /* Menempatkan gambar di atas */
-    position: relative;
   }
   
   .slide::before {
@@ -261,12 +249,6 @@
     background-color: rgba(0, 0, 0, 0.2); /* Warna latar belakang */
     z-index: 1;
     border-radius: 10px; /* Menyesuaikan dengan border gambar */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .slide:hover::before {
-    opacity: 1; /* Efek muncul saat dihover */
   }
   
   .slider-controls {
@@ -375,18 +357,11 @@
       }
     }
   }
-
-  // Toggle zoom effect on image click
-  slides.addEventListener('click', (event) => {
-    const clickedSlide = event.target.closest('.slide');
-    if (clickedSlide) {
-      clickedSlide.classList.toggle('zoomed');
-    }
-  });
 </script>
 
 </body>
 </html>
+
 
 
       <!-- 
