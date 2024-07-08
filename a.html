@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Slider</title>
+<!-- Include FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .slider-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc;
+  }
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .slide {
+    min-width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 5px solid transparent; /* Border di belakang gambar */
+  }
+  .slide img {
+    width: auto; /* Mengatur ukuran gambar menjadi fleksibel */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Menjaga aspek ratio dan mengisi ruang yang tersedia */
+    background-color: transparent; /* Menghapus latar belakang gambar */
+  }
+  .slide-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .slide-indicators {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .indicator {
+    width: 20px;
+    height: 4px; /* Tinggi ikon */
+    background-color: #aaa;
+    border-radius: 10px; /* Membuat bundar */
+    margin: 0 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  .indicator.active {
+    background-color: #FF6E61;
+  }
+  .indicator i {
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<div class="slider-container">
+  <div class="slides">
+    <div class="slide">
+      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist">
+    </div>
+    <div class="slide">
+      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist">
+    </div>
+    <div class="slide">
+      <img src="https://www.alyssaflorist.com/Alyssa-Florist.png" alt="Alyssa Florist">
+    </div>
+  </div>
+  
+  <div class="slide-controls">
+    <div class="slide-indicators">
+      <div class="indicator" onclick="currentSlide(0)"></div>
+      <div class="indicator" onclick="currentSlide(1)"></div>
+      <div class="indicator" onclick="currentSlide(2)"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelector('.slides');
+  const indicators = document.querySelectorAll('.indicator');
+  let slideIndex = 0;
+
+  function showSlide(index) {
+    slides.style.transform = `translateX(${-index * 100}%)`;
+  }
+
+  function setActiveIndicator(index) {
+    indicators.forEach((indicator, idx) => {
+      if (idx === index) {
+        indicator.classList.add('active');
+      } else {
+        indicator.classList.remove('active');
+      }
+    });
+  }
+
+  function currentSlide(index) {
+    slideIndex = index;
+    showSlide(slideIndex);
+    setActiveIndicator(slideIndex);
+  }
+</script>
+
+</body>
+</html>
